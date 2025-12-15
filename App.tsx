@@ -5,7 +5,7 @@ import { FreightForm } from './components/FreightForm';
 import { FreightList } from './components/FreightList';
 import { CSVImport } from './components/CSVImport';
 import { Card } from './components/ui/Card';
-import { Truck, Database } from 'lucide-react';
+import { Truck, Database, Trash2 } from 'lucide-react';
 
 const STORAGE_KEY = 'cdd_freight_system_v1';
 
@@ -58,6 +58,18 @@ const App: React.FC = () => {
     }
   };
 
+  const handleClearAll = () => {
+    if (records.length === 0) return;
+    
+    const confirmed = window.confirm(
+      "⚠️ ATENÇÃO CRÍTICA ⚠️\n\nVocê está prestes a apagar TODOS os registros do sistema.\nEsta ação é irreversível e excluirá todo o histórico.\n\nDeseja realmente continuar?"
+    );
+
+    if (confirmed) {
+      setRecords([]);
+    }
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center min-h-screen text-slate-500">Carregando sistema...</div>;
   }
@@ -105,7 +117,19 @@ const App: React.FC = () => {
 
         {/* List Section */}
         <section>
-          <h2 className="text-xl font-bold text-slate-800 mb-4">Histórico de Entregas</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-slate-800">Histórico de Entregas</h2>
+            {records.length > 0 && (
+              <button 
+                onClick={handleClearAll}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors focus:ring-2 focus:ring-red-500 focus:outline-none"
+                title="Apagar todos os registros do banco de dados local"
+              >
+                <Trash2 size={16} />
+                <span className="hidden sm:inline">Apagar Tudo</span>
+              </button>
+            )}
+          </div>
           <FreightList records={records} onDelete={handleDelete} />
         </section>
 

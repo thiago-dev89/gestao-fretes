@@ -1,0 +1,5 @@
+{
+  "name": "Gestão de Fretes - Crooserlog",
+  "description": "Sistema de controle de pagamentos de fretes para CDD Santa Luzia e CDD Contagem com persistência local.",
+  "requestFramePermissions": []
+}

@@ -5,12 +5,15 @@ export interface FreightRecord {
   driverName: string;
   licensePlate: string;
   vehicleType: string;
-  route: string; // Mapa / Rota
+  map: string;      // Novo campo: Número do Mapa
+  city: string;     // Novo campo: Cidade
+  region: string;   // Novo campo: Região/Bairro
   date: string;
   cdd: CDDLocation;
   deliveryCount: number;
   totalValue: number;
   createdAt: number;
+  mapClosedDate?: string;
 }
 
 export interface DashboardStats {
